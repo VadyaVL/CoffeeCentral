@@ -16,17 +16,25 @@ import org.junit.Test;
 
 import ua.coffee.Answer;
 import ua.coffee.Main;
+import ua.coffee.Town;
 
 public class CoffeeCentralTest {
 
 	@Test
-	public void checkLoadDataFromFile() {
+	public void checkLoadDataFromFileOne() {
 		List<String> input = Main.getTownCaseFromFile("input.txt");
 		List<String> mustBe = new ArrayList<>();
-		mustBe.add("4 4 5 3\n1 1\n1 2\n3 3\n4 4\n2 4\n1\n2\n4\n0 0 0 0");
+		mustBe.add("4 4 5 3\n1 1\n1 2\n3 3\n4 4\n2 4\n1\n2\n4\n");
 		
-		System.out.println(input.size());
-		assertThat("Parse invalid!", mustBe, is(Main.getResult(input)));		
+		assertThat("Parse invalid!", mustBe, is(input));		
+	}
+	
+	@Test
+	public void checkLoadDataFromFileTwo() {
+		List<String> input = Main.getTownCaseFromFile("input2.txt");
+		List<String> mustBe = new ArrayList<>();
+		
+		assertThat("Parse invalid!", mustBe, is(Main.getResult(input, false)));		
 	}
 	
 	@Test
@@ -39,7 +47,7 @@ public class CoffeeCentralTest {
 		mustBe.add(new Answer(4, 2, 2));
 		mustBe.add(new Answer(5, 3, 1));
 		
-		assertThat("Different result!", mustBe, is(Main.getResult(input)));		
+		assertThat("Different result!", mustBe, is(Main.getResult(input, false)));		
 	}
 	
 	@Test
@@ -50,7 +58,18 @@ public class CoffeeCentralTest {
 		
 		int mustBe = 3;
 		
-		assertEquals("Different result!", mustBe, Main.getResult(input).size());
+		assertEquals("Different result!", mustBe, Main.getResult(input, false).size());
+	}
+	
+	@Test
+	public void checkDistanceCalculating() {
+
+		int x1 = 15, y1 = 15;
+		int x2 = 25, y2 = -5;
+		int distance = 30;
+
+		assertEquals("Different result!", distance, Town.getDistance(x1, y1, x2, y2));
+		
 	}
 
 }

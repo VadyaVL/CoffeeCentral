@@ -15,11 +15,11 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		getResult(getTownCaseFromFile("input.txt"));
+		getResult(getTownCaseFromFile("input.txt"), true);
 		
 	}
 	
-	public static List<Answer> getResult(List<String> townCases){
+	public static List<Answer> getResult(List<String> townCases, boolean show){
 
 		List<Answer> res = new ArrayList<>();
 		
@@ -69,8 +69,13 @@ public class Main {
 			
 			Town town = new Town(dx, dy, x, y);
 			res.addAll(town.getAnswer(m));
-			System.out.println("Case " + numberOfCase++ + ":");
-			System.out.println(town.getAnswerAsString(m));
+			if(show){
+				System.out.println("Case " + numberOfCase++ + ":");
+				System.out.println(town.getAnswerAsString(m));
+			}
+			else {
+				numberOfCase++;
+			}
 		}
 		
 		return res;
